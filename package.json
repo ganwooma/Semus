@@ -1,0 +1,32 @@
+{
+  "name": "Semus",
+  "version": "0.1.0",
+  "private": true,
+  "description": "고령자 전자세금계산서 발급 보조 앱 (모의 홈택스용)",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "test:flow": "playwright test",
+    "build": "electron-builder --win"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "electron": "^37.2.3",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.semus.taxassist",
+    "productName": "세무스",
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    }
+  },
+  "dependencies": {
+    "@techstark/opencv-js": "^5.0.0-release.1",
+    "dotenv": "^16.6.1",
+    "playwright": "^1.55.0",
+    "sharp": "^0.34.5"
+  }
+}

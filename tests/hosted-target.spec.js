@@ -1,0 +1,51 @@
+const { test, expect } = require('@playwright/test');
+
+test('공개 모의 홈택스 입력 영역에 값만 자동 입력한다', async ({ page }) => {
+  await page.goto('https://estamp-helper.lovable.app/', { waitUntil: 'networkidle' });
+  const tables = page.locator('table');
+  await expect(tables).toHaveCount(6);
+  const supplier = tables.nth(1).locator('input');
+  await supplier.nth(0).fill('987');
+  await supplier.nth(1).fill('65');
+  await supplier.nth(2).fill('43210');
+  await supplier.nth(4).fill('새 공급자 상사');
+  await supplier.nth(5).fill('이공급');
+  await supplier.nth(8).fill('제조업');
+  await supplier.nth(9).fill('식품');
+  await expect(supplier.nth(4)).toHaveValue('새 공급자 상사');
+  const recipient = tables.nth(2);
+  const recipientInputs = recipient.locator('input');
+  await recipientInputs.nth(0).fill('123');
+  await recipientInputs.nth(1).fill('45');
+  await recipientInputs.nth(2).fill('67890');
+  await recipientInputs.nth(4).fill('테스트 거래처');
+  await recipientInputs.nth(5).fill('김대표');
+  await recipientInputs.nth(6).fill('01234');
+  await recipientInputs.nth(7).fill('서울시 테스트구 1길');
+  await recipientInputs.nth(8).fill('도소매');
+  await recipientInputs.nth(9).fill('농산물');
+  await recipientInputs.nth(10).fill('test');
+  await recipientInputs.nth(11).fill('example.kr');
+  await expect(recipientInputs.nth(4)).toHaveValue('테스트 거래처');
+  await expect(recipientInputs.nth(7)).toHaveValue('서울시 테스트구 1길');
+
+  const dateInputs = tables.nth(3).locator('input');
+  await dateInputs.nth(0).fill('2026-07-18');
+  await dateInputs.nth(4).fill('테스트 비고');
+  const items = tables.nth(4).locator('input');
+  await items.nth(0).fill('07');
+  await items.nth(1).fill('18');
+  await items.nth(2).fill('농산물 판매');
+  await items.nth(3).fill('1상자');
+  await items.nth(4).fill('2');
+  await items.nth(5).fill('50000');
+  await items.nth(6).fill('100000');
+  await items.nth(7).fill('10000');
+  await items.nth(8).fill('품목 비고');
+  await expect(items.nth(6)).toHaveValue('100,000');
+  await expect(items.nth(7)).toHaveValue('10,000');
+  const payment = tables.nth(5).locator('input');
+  await payment.nth(0).fill('100000');
+  await expect(payment.nth(0)).toHaveValue('100000');
+  // Deliberately no click on the site's '발급하기' button.
+});
